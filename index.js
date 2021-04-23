@@ -7,6 +7,7 @@ const server = http.createServer(app);
 const wss = new WebSocket.Server({ server });
 
 /**
+ * Comment
  * @param data is the response sent by headset. It's a mental
  * command JSON repsonse object, which looks like : 
     {        
