@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="icon"  href="../public/img/favicon.png" type="image/icon">
+      <link rel="stylesheet" type="text/css" href="../public/css/style.css">
+      <link rel="stylesheet" type="text/css" href="../public/css/instagram.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+      <title>Login Instagram</title>
+   </head>
+   <body>
+      <header class="header-area">
+         <!-- site-navbar start -->
+         <div class="navbar-area">
+            <div class="container">
+               <!-- site logo -->
+               <a href="#home" class="site-logo">X14</a>
+               <nav class="site-navbar">
+                  <!-- site menu/nav -->
+                  <ul id="control">
+                     <li ><a id="d1" href="home.html" >Home</a></li>
+                     <li ><a id="d2" href="https://www.google.com/">Project</a></li>
+                     <li ><a id="d3" href="instagram.html">Instagram</a></li>
+                     <li ><a id="d4" href="https://www.google.com/">YouTube</a></li>
+                  </ul>
+                  <!-- nav-toggler for mobile version only -->
+                  <button id="d11" class="nav-toggler">
+                  <span></span>
+                  </button>
+               </nav>
+            </div>
+         </div>
+         <!-- navbar-area end -->
+      </header>
+      <div id="loginInsta">
+         <div class="main-content">
+            <div class="logo-img">
+               <img src="https://static0.srcdn.com/wordpress/wp-content/uploads/2018/04/YouTube-Logo.jpg" />
+            </div>
+            <div class="login-part">
+               <input id="search_query" type="text" placeholder="Query" class="input-1" />
+               <input id="btnLog" type="button" value="Search" class="btn-log" onclick="searchYT();" />
+            </div>
+         </div>
+         <div class="writing-box">
+            <ul id="write-texte-slide">
+               <!--pages or li are comes from javascript --> 
+            </ul>
+            <p id="next-block"></p>
+         </div>
+      </div>
+      
+<script>
+
+   function searchYT() {
+       let text = document.getElementById("search_query").value;
+       let fields = text.split(" ");
+       
+       let link = "https://www.youtube.com/results?search_query=";
+
+       for(let i=0; i < fields.length; i++) {
+           link += fields[i] + "+";
+       }
+
+       console.log(link);
+       window.location = link;
+   }
+
+</script>
+
+      <script src="../public/js/instagram/alphabetSlider.js"></script>
+      <!-- <script src="../public/js/processMenuResult.js"></script> -->
+      <script src="../public/js/instagram/youtubeNav.js"></script>
+      <script src="../public/js/menuControlKey.js"></script>
+      <script src="../public/js/configNav.js"></script>
+      <script src="../public/js/socketParse.js"></script>
+   </body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+    <head>
+        <title>WebSocket test.</title>
+        <link rel="stylesheet" href="../public/css/style.css">
+    </head>
+    <body>
+        <p>WebSocket test in client / server architecture.</p>
+        <textarea id="inputArea" rows="4" cols="60" placeholder="This is where input will be written to."></textarea>
+        <br>
+        <button type="button" onclick="buttonClicked()">Click Me!</button>
+        <br>
+        <table id="alphabet" style="width:50%">
+            <tr>
+              <td id="0">A</td>
+              <td id="1">B</td>
+              <td id="2">C</td>
+              <td id="3">D</td>
+              <td id="4">E</td>
+              <td id="5">F</td>
+              <td id="6">G</td>
+              <td id="7">H</td>
+              <td id="8">I</td>
+              <td id="9">J</td>
+              <td id="10">K</td>
+              <td id="11">L</td>
+              <td id="12">M</td>
+              <td id="13">N</td>
+              <td id="14">O</td>
+              <td id="15">P</td>
+              <td id="16">Q</td>
+              <td id="17">R</td>
+              <td id="18">S</td>
+              <td id="19">T</td>
+              <td id="20">U</td>
+              <td id="21">V</td>
+              <td id="22">W</td>
+              <td id="23">X</td>
+              <td id="24">Y</td>
+              <td id="25">Z</td>
+            </tr>
+        </table>
+    </body>
+    <script>
+        
+        function mod(n, m) {
+           return ((n % m) + m) % m;
+        }
+    
+        let current = 0;
+        let initialCell = document.getElementById(current.toString());
+        initialCell.style.color = "green";
+        let previousCell, currentCell;
+        let area;
+        function buttonClicked() {
+            ws.send("Poked");
+        }
+
+        const ws = new WebSocket('ws://localhost:6969')
+        ws.onopen = () => {
+            ws.send('Client Connected !')
+        }
+
+        ws.onmessage = (message) => {
+            
+            let result = JSON.parse(message["data"]);
+            
+            if(result["name"] === "BrainRes") {
+                switch(result["result"]) {
+                    case "left":
+                        previousCell = document.getElementById(current.toString());
+                        previousCell.style.backgroundColor = "white"; 
+                        current = mod(current - 1, 26);
+                        console.log(current)
+                        newCell = document.getElementById(current.toString());
+                        newCell.style.backgroundColor = "red";
+                        break;
+                    case "right":
+                        //console.log(current.toString());
+                        previousCell = document.getElementById(current.toString());
+                        previousCell.style.backgroundColor = "white"; 
+                        current = mod(current + 1, 26);
+                        newCell = document.getElementById(current.toString());
+                        newCell.style.backgroundColor = "red";
+                        break;
+                    case "push":
+                        console.log("Push \n", area);
+                        currentCell = document.getElementById(current.toString());
+                        area = document.getElementById("inputArea");
+                        area.value = area.value + currentCell.innerText;
+                        break;
+                }
+            } else { 
+                console.log(`message from server received : `, message.data)
+            }
+        }
+    </script>
+</html>
